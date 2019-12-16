@@ -67,4 +67,6 @@ public class Sport {
     public void setProfiles(List<Profile> profiles) {
         this.profiles = profiles;
     }
+
 }
+
