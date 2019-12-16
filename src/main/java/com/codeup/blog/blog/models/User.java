@@ -27,22 +27,27 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Game> games;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     public User() {}
 
-    public User(String username, String email, String password, List<Game> games) {
+    public User(String username, String email, String password, List<Game> games, List<Comment> comments) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.games = games;
+        this.comments = comments;
     }
 
-    public User(long id, String username, String email, String password, Profile profile, List<Game> games) {
+    public User(long id, String username, String email, String password, Profile profile, List<Game> games, List<Comment> comments) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.id = id;
         this.profile = profile;
         this.games = games;
+        this.comments = comments;
     }
 
     public User(User user) {
@@ -52,6 +57,7 @@ public class User {
         this.email = user.email;
         this.profile = user.profile;
         this.games = user.games;
+        this.comments = user.comments;
     }
 
     public long getId() {
@@ -100,6 +106,14 @@ public class User {
 
     public void setGames(List<Game> games) {
         this.games = games;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 }
 
