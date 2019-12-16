@@ -3,6 +3,7 @@ package com.codeup.blog.blog.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,20 +24,25 @@ public class User {
     @OneToOne
     private Profile profile;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Game> games;
+
     public User() {}
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, List<Game> games) {
         this.username = username;
         this.email = email;
         this.password = password;
+        this.games = games;
     }
 
-    public User(long id, String username, String email, String password, Profile profile) {
+    public User(long id, String username, String email, String password, Profile profile, List<Game> games) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.id = id;
         this.profile = profile;
+        this.games = games;
     }
 
     public User(User user) {
@@ -45,6 +51,7 @@ public class User {
         this.password = user.password;
         this.email = user.email;
         this.profile = user.profile;
+        this.games = user.games;
     }
 
     public long getId() {
@@ -77,6 +84,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public List<Game> getGames() {
+        return games;
+    }
+
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 }
 
