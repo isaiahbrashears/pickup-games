@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,12 +20,31 @@ public class User {
     @Column(nullable = false, columnDefinition = "VARCHAR(250)")
     private String password;
 
+    @OneToOne
+    private Profile profile;
+
     public User() {}
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+    }
+
+    public User(long id, String username, String email, String password, Profile profile) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.id = id;
+        this.profile = profile;
+    }
+
+    public User(User user) {
+        this.id = user.id;
+        this.username = user.username;
+        this.password = user.password;
+        this.email = user.email;
+        this.profile = user.profile;
     }
 
     public long getId() {
