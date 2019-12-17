@@ -12,7 +12,7 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, columnDefinition = "VARCHAR(50)")
+    @Column(columnDefinition = "VARCHAR(50)")
     private String name;
 
     @OneToOne
