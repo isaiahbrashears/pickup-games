@@ -1,0 +1,39 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Create New Game</h1>
+
+    <!-- CREATE NEW GAME FORM-->
+    <form th:action="@{/games/create/}" th:object="${game}" method="post">
+        <label for="title">Please enter a title for your game</label>
+        <input id="title" type="text" th:field="*{title}">
+
+        <label for="location">Enter address of event</label>
+        <input id="location" type="text" th:field="*{location}">
+
+        <label >select a sport</label>
+        <select  th:field="*{sport}" required="required">
+            <th:block th:each="sport: ${sports}">
+                <option th:name="sport"  th:value="${sport.id}" ><span th:text="${sport.name}"></span>
+                </option>
+            </th:block>
+
+        </select>
+
+
+        <label for="min">min participants required</label>
+        <input id="min" type="number" max="200" th:field="*{minRequired}">
+
+
+        <input type="submit">
+
+    </form>
+</body>
+</html>

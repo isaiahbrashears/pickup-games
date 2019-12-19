@@ -16,13 +16,12 @@ public class Sport {
     @Column(nullable = false, columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @ManyToOne
-    @JoinColumn (name = "game_id")
-    private Game game;
+    @OneToMany(mappedBy = "sport", cascade = CascadeType.ALL)
+    private List<Game> games;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "profile_sports",
+            name = "sports_profiles",
             joinColumns = {@JoinColumn(name="sport_id")},
             inverseJoinColumns = {@JoinColumn(name="profile_id")}
     )
@@ -30,9 +29,9 @@ public class Sport {
 
     public Sport() { }
 
-    public Sport(String name, Game game, List<Profile> profiles) {
+    public Sport(String name, List<Game> games, List<Profile> profiles) {
         this.name = name;
-        this.game = game;
+        this.games = games;
         this.profiles = profiles;
     }
 
@@ -52,12 +51,12 @@ public class Sport {
         this.name = name;
     }
 
-    public Game getGame() {
-        return game;
+    public List<Game> getGames() {
+        return games;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
+    public void setGames(List<Game> games) {
+        this.games = games;
     }
 
     public List<Profile> getProfiles() {
