@@ -28,12 +28,19 @@ public class Game {
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    public Game(String title, String location, User user, List comments, int minRequired) {
+
+
+    @ManyToOne
+    @JoinColumn (name = "sport_id")
+    private Sport sport;
+
+    public Game(String title, String location, User user, List<Comment> comments, int minRequired, Sport sport) {
         this.title = title;
         this.location = location;
         this.user = user;
         this.comments = comments;
         this.minRequired = minRequired;
+        this.sport = sport;
     }
 
     public Game() {}
@@ -84,6 +91,14 @@ public class Game {
 
     public void setMinRequired(int minRequired) {
         this.minRequired = minRequired;
+    }
+
+    public Sport getSport() {
+        return sport;
+    }
+
+    public void setSport(Sport sport) {
+        this.sport = sport;
     }
 }
 
